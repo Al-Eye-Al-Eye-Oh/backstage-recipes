@@ -53,6 +53,15 @@ export default function RecipeDetail() {
         ))}
       </div>
 
+      {recipe.notes && (
+        <div className="px-4 mb-6">
+          <p className="text-sm text-gray-400 font-medium mb-2">Notes</p>
+          <div className="bg-surface-800 rounded-2xl px-5 py-4">
+            <p className="text-gray-300 text-sm whitespace-pre-wrap leading-relaxed">{recipe.notes}</p>
+          </div>
+        </div>
+      )}
+
       <div className="px-4">
         <button
           onClick={() => navigate(`/recipes/${id}/scale`)}
