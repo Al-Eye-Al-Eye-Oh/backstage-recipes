@@ -11,7 +11,6 @@ export default function RecipeForm() {
   const navigate = useNavigate()
 
   const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
   const [notes, setNotes] = useState('')
   const [ingredients, setIngredients] = useState([emptyIngredient()])
   const [saving, setSaving] = useState(false)
@@ -22,7 +21,7 @@ export default function RecipeForm() {
     async function load() {
       const { data: recipe } = await supabase.from('recipes').select('*').eq('id', id).single()
       const { data: ings } = await supabase.from('ingredients').select('*').eq('recipe_id', id).order('position')
-      if (recipe) { setName(recipe.name); setDescription(recipe.description || ''); setNotes(recipe.notes || '') }
+      if (recipe) { setName(recipe.name); setNotes(recipe.notes || '') }
       if (ings?.length) setIngredients(ings.map(i => ({ id: i.id, name: i.name, quantity: String(i.quantity), unit: i.unit })))
     }
     load()
@@ -51,12 +50,12 @@ export default function RecipeForm() {
     try {
       let recipeId = id
       if (isEdit) {
-        await supabase.from('recipes').update({ name: name.trim(), description: description.trim(), notes: notes.trim() }).eq('id', id)
+        await supabase.from('recipes').update({ name: name.trim(), notes: notes.trim() }).eq('id', id)
         await supabase.from('ingredients').delete().eq('recipe_id', id)
       } else {
         const { data, error: err } = await supabase
           .from('recipes')
-          .insert({ name: name.trim(), description: description.trim(), notes: notes.trim() })
+          .insert({ name: name.trim(), notes: notes.trim() })
           .select()
           .single()
         if (err) throw err
@@ -113,17 +112,6 @@ export default function RecipeForm() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="e.g. Batch Negroni"
-            className="w-full bg-surface-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-base outline-none focus:ring-2 focus:ring-brand-500"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm text-gray-400 font-medium">Description <span className="text-gray-600">(optional)</span></label>
-          <input
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder="e.g. 10-serving batch, stirred"
             className="w-full bg-surface-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-base outline-none focus:ring-2 focus:ring-brand-500"
           />
         </div>

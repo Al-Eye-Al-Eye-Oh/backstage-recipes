@@ -35,7 +35,6 @@ export default function RecipeDetail() {
         </button>
         <div className="flex-1">
           <h1 className="text-xl font-bold">{recipe.name}</h1>
-          {recipe.description && <p className="text-gray-400 text-sm">{recipe.description}</p>}
         </div>
         <button onClick={() => navigate(`/recipes/${id}/edit`)} className="text-brand-500 text-sm font-medium px-2 py-1">
           Edit

@@ -21,8 +21,7 @@ export default function RecipeList() {
   }, [])
 
   const filtered = recipes.filter(r =>
-    r.name.toLowerCase().includes(query.toLowerCase()) ||
-    (r.description && r.description.toLowerCase().includes(query.toLowerCase()))
+    r.name.toLowerCase().includes(query.toLowerCase())
   )
 
   return (
@@ -74,9 +73,6 @@ export default function RecipeList() {
                 className="w-full text-left bg-surface-800 rounded-2xl px-5 py-4 active:bg-surface-700 transition-colors"
               >
                 <p className="font-semibold text-base">{r.name}</p>
-                {r.description && (
-                  <p className="text-gray-400 text-sm mt-0.5 line-clamp-1">{r.description}</p>
-                )}
                 <p className="text-xs text-gray-500 mt-1">
                   {new Date(r.created_at).toLocaleDateString()}
                 </p>
