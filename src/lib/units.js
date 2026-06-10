@@ -1,5 +1,5 @@
 // All conversions relative to ml as the base unit
-export const UNITS = ['ml', 'oz', 'L', 'tsp', 'tbsp', 'cup', 'dash', 'barspoon', 'g', 'kg', 'pinch', 'each']
+export const UNITS = ['ml', 'oz', 'L', 'tsp', 'tbsp', 'cup', 'qt', 'dash', 'barspoon', 'g', 'kg', 'pinch', 'each']
 
 const TO_ML = {
   ml: 1,
@@ -8,6 +8,7 @@ const TO_ML = {
   tsp: 4.92892,
   tbsp: 14.7868,
   cup: 236.588,
+  qt: 946.353,
   dash: 0.6,
   barspoon: 5,
   pinch: 0.3,
